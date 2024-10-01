@@ -14,9 +14,17 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 3001;
 const databaseURL = process.env.DATABASE_URL;
+const allowedOrigins = ['https://chat-app-client-tau-nine.vercel.app', 'https://chat-app-client-tau-nine.vercel.app:5173'];
+
 app.use(
   cors({
-    origin: process.env.ORIGIN,
+   origin: function (origin, callback) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true,
   })
