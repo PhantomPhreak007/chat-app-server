@@ -14,7 +14,7 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 3001;
 const databaseURL = process.env.DATABASE_URL;
-const allowedOrigins = ['https://chat-app-client-tau-nine.vercel.app', 'https://chat-app-client-tau-nine.vercel.app:5173'];
+const allowedOrigins = ['https://chat-app-client-tau-nine.vercel.app', 'https://chat-app-client-tau-nine.vercel.app:5173','https://chat-app-client-tau-nine.vercel.app/'];
 
 app.use(
   cors({
