@@ -7,9 +7,17 @@ import { renameSync, unlinkSync } from "fs";
 const maxAge = 3 * 24 * 60 * 60 * 1000;
 
 const createToken = (email, userId) => {
-  return jwt.sign({ email, userId }, process.env.JWT_KEY, {
-    expiresIn: maxAge,
-  });
+  try {
+    const token = jwt.sign({ email, userId }, process.env.JWT_KEY, {
+      expiresIn: maxAge,
+    });
+
+    return token; // Return the token if successful
+
+  } catch (err) {
+    console.error("Error while creating JWT token:", err.message); // Log error message
+    return null; // Return null if token creation fails
+  }
 };
 
 export const signup = async (request, response, next) => {
